@@ -4,7 +4,7 @@
   "description": "A basic Task Manager App where we can create,delete,update tasks",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "author": "Aayush Wadhwani",
   "license": "ISC",
