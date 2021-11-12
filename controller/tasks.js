@@ -12,13 +12,12 @@ const getAllTasks = async (req,res) => {
 
 const getSingleTask = async (req,res) => {
     let { id:taskID } = req.params;
-    taskID = mongoose.Types.ObjectId(taskID);
     try {
         const task = await taskModel.findOne({_id:taskID});
         if(!task){
             return res.status(404).json({message:`Cannot Find Task with ID ${taskID}`});
         }
-        res.status(200).json(task);
+        res.status(200).json({task});
     } catch (error) {
         res.status(500).json({error});
     }

@@ -7,6 +7,7 @@ const port = 5000;
 const app = express();
 
 //middlewares
+app.use(express.static('./public'));
 app.use(express.json());//we will send json as the body...
 
 app.get('/',(req,res)=>{
