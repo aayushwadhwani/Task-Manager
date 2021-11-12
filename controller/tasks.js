@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const taskModel = require('../models/task');
 
 const getAllTasks = async (req,res) => {
@@ -35,8 +34,18 @@ const createTask = async (req,res) =>{
     }
 }
 
-const updateTask = (req,res) =>{
-    res.status(200).send('Updated A task');
+const updateTask = async (req,res) =>{
+    const { id:taskID } = req.params;
+    const data = req.body;
+    try {
+        const task = await taskModel.findOneAndUpdate({_id:taskID},data,{new:true, runValidators:true});
+        if(!task){
+            return res.status(404).json({message: `Cannot Find Task with id ${taskID}`});
+        }
+        res.status(200).json({task});
+    } catch (err) {
+        res.status(500).json({err});
+    }
 }
 
 const deleteTask = async (req,res) => {
